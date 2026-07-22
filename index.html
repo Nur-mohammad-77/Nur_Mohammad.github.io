@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>নুর মোহাম্মদ - অল-ইন-ওয়ান পোর্টফোলিও</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+            text-align: center;
+        }
+        /* হেডার ও নেভিগেশন বার */
+        header {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: white;
+            padding: 25px 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        nav {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        nav button {
+            background: #334155;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            cursor: pointer;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        nav button:hover, nav button.btn-active {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+        /* মূল সেকশনসমূহ */
+        .container {
+            max-width: 850px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+        .section {
+            display: none; /* ডিফল্টভাবে সব হাইড থাকবে */
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: left;
+        }
+        .active {
+            display: block; /* সিলেক্ট করা সেকশন শো করবে */
+        }
+        .section h2 {
+            color: #1e293b;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+        /* প্রজেক্ট কার্ড */
+        .project-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            background: #f8fafc;
+        }
+        iframe {
+            width: 100%;
+            height: 380px;
+            border: none;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        /* ফেসবুক বাটন */
+        .btn-fb {
+            display: inline-block;
+            background-color: #1877F2;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+        .btn-fb:hover {
+            background-color: #145dbf;
+        }
+        ul {
+            margin-left: 20px;
+            margin-top: 10px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>নুর মোহাম্মদ 👋</h1>
+        <p>ওয়েব, টেকনোলজি ও প্রজেক্ট হাব</p>
+        
+        <!-- নেভিগেশন বাটনসমূহ -->
+        <nav>
+            <button class="nav-btn btn-active" onclick="showSection('home', this)">হোম</button>
+            <button class="nav-btn" onclick="showSection('about', this)">আমার সম্পর্কে</button>
+            <button class="nav-btn" onclick="showSection('projects', this)">প্রজেক্টসমূহ</button>
+            <button class="nav-btn" onclick="showSection('plans', this)">ভবিষ্যৎ প্ল্যান</button>
+            <button class="nav-btn" onclick="showSection('gallery', this)">গ্যালারি</button>
+            <button class="nav-btn" onclick="showSection('contact', this)">যোগাযোগ</button>
+        </nav>
+    </header>
+
+    <div class="container">
+
+        <!-- ১. হোম সেকশন -->
+        <div id="home" class="section active">
+            <h2>🏠 স্বাগতম!</h2>
+            <p>আমার ব্যক্তিগত ডিজিটাল স্পেসে আপনাকে স্বাগতম। এই ওয়েবসাইটে আমার কাজের অভিজ্ঞতা, নতুন নতুন প্রজেক্ট এবং ভবিষ্যৎ পরিকল্পনার আপডেট পাবেন।</p>
+        </div>
+
+        <!-- ২. আমার সম্পর্কে -->
+        <div id="about" class="section">
+            <h2>👨‍💻 আমার সম্পর্কে</h2>
+            <p>আমি নুর মোহাম্মদ। টেকনোলজি, ওয়েব ডেভলপমেন্ট এবং ইলেকট্রনিক্স নিয়ে কাজ করতে আমি পছন্দ করি।</p>
+            <br>
+            <h4>আমার দক্ষতাসমূহ:</h4>
+            <ul>
+                <li>ইলেকট্রনিক্স ও Wokwi সার্কিট সিমুলেশন</li>
+                <li>HTML & CSS দিয়ে ওয়েবসাইট তৈরি</li>
+                <li>নতুন নতুন টেকনোলজি নিয়ে রিসার্চ করা</li>
+            </ul>
+        </div>
+
+        <!-- ৩. প্রজেক্ট সেকশন -->
+        <div id="projects" class="section">
+            <h2>🤖 প্রজেক্টসমূহ</h2>
+            
+            <div class="project-card">
+                <h3>১. Wokwi Simulation Project 1</h3>
+                <p>আমার তৈরি প্রথম সার্কিট সিমুলেশন প্রজেক্ট:</p>
+                <iframe src="https://wokwi.com/projects/338271731557991506/embed"></iframe>
+            </div>
+
+            <!-- পরবর্তীতে নতুন প্রজেক্ট এলে এই ব্লকটির মতো নিচে বসিয়ে দেবে -->
+        </div>
+
+        <!-- ৪. ভবিষ্যৎ প্ল্যান -->
+        <div id="plans" class="section">
+            <h2>🚀 ভবিষ্যৎ পরিকল্পনা</h2>
+            <p>সামনে আমার যে কাজগুলো করার ইচ্ছা আছে:</p>
+            <ul>
+                <li>আরও অ্যাডভান্সড IoT প্রজেক্ট তৈরি করা।</li>
+                <li>কোডিং শিখে প্রফেশনাল লেভেলের ফুল-স্ট্যাক ওয়েবসাইট বানানো।</li>
+                <li>অন্যদের টেকনোলজি শিখতে সাহায্য করা।</li>
+            </ul>
+        </div>
+
+        <!-- ৫. গ্যালারি সেকশন -->
+        <div id="gallery" class="section">
+            <h2>📸 গ্যালারি</h2>
+            <p>এখানে ভবিষ্যতে তোমার কোনো সুন্দর প্রজেক্টের ছবি বা ব্যক্তিগত ছবি যুক্ত করে রাখতে পারবে।</p>
+        </div>
+
+        <!-- ৬. যোগাযোগ সেকশন -->
+        <div id="contact" class="section">
+            <h2>📲 যোগাযোগ</h2>
+            <p>যেকোনো প্রশ্ন, সাহায্য বা প্রজেক্ট সম্পর্কিত বিষয়ে আমার সাথে সরাসরি কানেক্ট হতে পারো:</p>
+            <br>
+            <a href="https://facebook.com/YOUR_FB_ID" target="_blank" class="btn-fb">
+                আমার ফেসবুক প্রোফাইলে যান ➔
+            </a>
+        </div>
+
+    </div>
+
+    <!-- JavaScript code -->
+    <script>
+        function showSection(sectionId, btn) {
+            // সব সেকশন হাইড করা
+            let sections = document.querySelectorAll('.section');
+            sections.forEach(sec => sec.classList.remove('active'));
+
+            // সব বাটনের অ্যাক্টিভ স্টাইল রিমুভ করা
+            let buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(b => b.classList.remove('btn-active'));
+
+            // সিলেক্ট করা সেকশন ও বাটন অন করা
+            document.getElementById(sectionId).classList.add('active');
+            btn.classList.add('btn-active');
+        }
+    </script>
+
+</body>
+</html>
