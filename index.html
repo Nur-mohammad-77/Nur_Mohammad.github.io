@@ -98,14 +98,39 @@
             border-color: #2563eb;
         }
         
+        /* প্রজেক্ট একর্ডিয়ন স্টাইল */
         .project-card {
-            border: 1px solid #e2e8f0;
+            border: 1px solid #cbd5e1;
             border-radius: 8px;
-            padding: 20px;
-            margin-top: 20px;
+            margin-top: 15px;
             background: #ffffff;
+            overflow: hidden;
         }
         
+        .project-header {
+            background: #f1f5f9;
+            padding: 15px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #1e293b;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        .project-header:hover {
+            background: #e2e8f0;
+        }
+
+        .project-content {
+            display: none;
+            padding: 20px;
+            border-top: 1px solid #cbd5e1;
+            background: #fafafa;
+        }
+
         .btn-action {
             display: inline-block;
             width: 100%;
@@ -155,7 +180,6 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-        // আপনার ফায়ারবেস কনফিগারেশন
         const firebaseConfig = {
             apiKey: "AIzaSyAxwXrdpLQGrrV-njkWnrdfrb5jNvOklX8",
             authDomain: "nur-microtech.firebaseapp.com",
@@ -169,7 +193,6 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
-        // লগইন ফাংশন
         window.loginUser = function() {
             const email = document.getElementById('emailInput').value;
             const password = document.getElementById('passInput').value;
@@ -184,12 +207,10 @@
                 });
         };
 
-        // লগআউট ফাংশন
         window.logoutUser = function() {
             signOut(auth);
         };
 
-        // লগইন স্ট্যাটাস চেক
         onAuthStateChanged(auth, (user) => {
             const loginBox = document.getElementById('loginBox');
             const protectedProjects = document.getElementById('protectedProjects');
@@ -261,11 +282,29 @@
                     <button class="btn-action btn-logout" onclick="logoutUser()">🔓 লগআউট করুন</button>
                 </div>
 
+                <!-- প্রজেক্ট-১ -->
                 <div class="project-card">
-                    <h3>১. Wokwi Simulation Project 1</h3>
-                    <p>আমার তৈরি প্রথম সিকিউর সার্কিট সিমুলেশন প্রজেক্ট:</p>
-                    <iframe src="https://wokwi.com/projects/469244889301297153/embed"></iframe>
+                    <div class="project-header" onclick="toggleProject('p1', this)">
+                        <span>📦 Project-1: IoT Smart Medicine Box</span>
+                        <span class="icon">🔽</span>
+                    </div>
+                    <div id="p1" class="project-content">
+                        <p>আমার তৈরি প্রথম সিকিউর সার্কিট সিমুলেশন প্রজেক্ট:</p>
+                        <iframe src="https://wokwi.com/projects/469244889301297153/embed"></iframe>
+                    </div>
                 </div>
+
+                <!-- প্রজেক্ট-২ (ভবিষ্যতের নমুনা) -->
+                <div class="project-card">
+                    <div class="project-header" onclick="toggleProject('p2', this)">
+                        <span>⚙️ Project-2: Smart Home Automation</span>
+                        <span class="icon">🔽</span>
+                    </div>
+                    <div id="p2" class="project-content">
+                        <p>এখানে আপনার ২য় প্রজেক্ট আসবে...</p>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -308,6 +347,20 @@
 
             document.getElementById(sectionId).classList.add('active');
             btn.classList.add('btn-active');
+        }
+
+        // প্রজেক্ট টগল ফাংশন
+        function toggleProject(id, headerElem) {
+            const content = document.getElementById(id);
+            const icon = headerElem.querySelector('.icon');
+
+            if (content.style.display === "block") {
+                content.style.display = "none";
+                icon.innerText = "🔽";
+            } else {
+                content.style.display = "block";
+                icon.innerText = "🔼";
+            }
         }
     </script>
 
