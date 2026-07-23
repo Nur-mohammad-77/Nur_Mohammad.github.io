@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>নুর মোহাম্মদ - অল-ইন-ওয়ান পোর্টফোলিও</title>
     
-    <!-- Font Awesome -->
+    <!-- Font Awesome (আইকনের জন্য) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -37,19 +37,65 @@
         .section.active { display: block !important; }
         .section h2 { font-size: 22px; color: #0f172a; margin-bottom: 12px; }
         
-        /* নোটিশ ও মতামত বক্স স্টাইল */
-        .notice-feedback-box {
-            background: #f0f9ff;
-            border: 1px solid #bae6fd;
-            border-left: 5px solid #0284c7;
+        /* আপনার অরিজিনাল নোটিশ এবং লাইক/মতামত বক্স */
+        .author-notice-box {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-left: 5px solid #2563eb;
             padding: 20px;
             border-radius: 8px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #1e3a8a;
+            line-height: 1.6;
         }
-        .notice-feedback-box h3 { color: #0369a1; margin-bottom: 8px; font-size: 17px; }
-        .notice-feedback-box p { font-size: 14px; color: #334155; margin-bottom: 12px; }
-        .feedback-area { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; resize: vertical; min-height: 70px; font-size: 14px; margin-bottom: 10px; outline: none; }
-        .btn-feedback { background-color: #0284c7; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .like-container {
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-like {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 7px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: background 0.2s;
+        }
+        .btn-like:hover { background-color: #1d4ed8; }
+
+        /* মতামত বক্স ডিজাইন */
+        .feedback-area-box {
+            margin-top: 15px;
+            padding-top: 12px;
+            border-top: 1px dashed #bfdbfe;
+        }
+        .feedback-area { 
+            width: 100%; 
+            padding: 10px; 
+            border: 1px solid #cbd5e1; 
+            border-radius: 6px; 
+            resize: vertical; 
+            min-height: 60px; 
+            font-size: 13px; 
+            margin-top: 8px; 
+            margin-bottom: 8px; 
+            outline: none; 
+        }
+        .btn-feedback { 
+            background-color: #0284c7; 
+            color: white; 
+            border: none; 
+            padding: 7px 15px; 
+            border-radius: 6px; 
+            font-weight: 600; 
+            font-size: 13px;
+            cursor: pointer; 
+        }
         .btn-feedback:hover { background-color: #0369a1; }
         .feedback-msg { color: #16a34a; font-size: 13px; font-weight: bold; margin-top: 5px; display: none; }
 
@@ -69,7 +115,7 @@
         .error-text { color: #ef4444; font-size: 13px; font-weight: bold; margin-top: 8px; text-align: center; }
 
         /* সোশ্যাল মিডিয়া বাটন স্টাইল */
-        .social-links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
+        .social-links { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
         .btn-social { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; color: white !important; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px; transition: transform 0.2s, opacity 0.2s; }
         .btn-social:hover { transform: translateY(-2px); opacity: 0.9; }
         .btn-facebook { background-color: #1877F2; }
@@ -152,19 +198,27 @@
 
         <!-- ৪. জ্ঞান ও শিক্ষা হাব -->
         <div id="studyHub" class="section">
-            <!-- নোটিশ ও মতামত বক্স -->
-            <div class="notice-feedback-box">
-                <h3>📢 বিশেষ নোটিশ</h3>
-                <p>শিক্ষা হাব সেকশনে নিয়মিত নতুন বই ও নোটস আপডেট করা হচ্ছে। আপনার যেকোনো মতামত নিচে শেয়ার করতে পারেন:</p>
-                <textarea id="userFeedback" class="feedback-area" placeholder="এখানে আপনার মতামত বা পরামর্শ লিখুন..."></textarea>
-                <button class="btn-feedback" onclick="submitFeedback()">মতামত পাঠান</button>
-                <div id="feedbackSuccess" class="feedback-msg">আপনার মতামত সফলভাবে জমা হয়েছে! ধন্যবাদ।</div>
+            
+            <!-- অরিজিনাল লেখকদের নোটিশ ও পছন্দ বাটন -->
+            <div class="author-notice-box">
+                <b>📌 নোটিশ:</b> এখানে উল্লেখিত সকল ডিজিটাল বই এবং পাঠ্য উপকরণ বিভিন্ন উন্মুক্ত উৎস থেকে সংগ্রহ করা হয়েছে। সকল কৃতিত্ব মূল লেখক ও প্রকাশকদের।
+                <div class="like-container">
+                    <button class="btn-like" onclick="likeNotice()">👍 পছন্দ হয়েছে (<span id="likeCount">0</span>)</button>
+                </div>
+
+                <!-- আপনার চাওয়া মতামত জানানোর অপশন -->
+                <div class="feedback-area-box">
+                    <b>💬 আপনার মূল্যবান মতামত বা অনুরোধ লিখুন:</b>
+                    <textarea id="userFeedback" class="feedback-area" placeholder="কোন বই বা নোটসের প্রয়োজন থাকলে মতামত লিখুন..."></textarea>
+                    <button class="btn-feedback" onclick="submitFeedback()">মতামত পাঠান</button>
+                    <div id="feedbackSuccess" class="feedback-msg">আপনার মতামত জমা নেওয়া হয়েছে! ধন্যবাদ।</div>
+                </div>
             </div>
 
             <h2>📚 ডিজিটাল জ্ঞান ও শিক্ষা হাব</h2>
             <p>এখানে সব ধরণের বই, লেকচার নোটস ও ক্লাস রেকর্ড সুসংগঠিত রয়েছে:</p>
 
-            <!-- ক্যাটাগরি কার্ড -->
+            <!-- অরিজিনাল ক্যাটাগরি -->
             <div id="hubMainCategories" class="grid-container">
                 <div class="hub-card" onclick="openStudyFolder('academicView')"><span>🏫</span> একাডেমি (Class 1 - 12)</div>
                 <div class="hub-card" onclick="openStudyFolder('ieltsView')"><span>🇬🇧</span> IELTS প্রিপারেশন</div>
@@ -172,8 +226,8 @@
                 <div class="hub-card" onclick="openStudyFolder('literatureView')"><span>📖</span> সাহিত্য ও অন্যান্য</div>
             </div>
 
-            <!-- সাব ভিউ কন্টেন্ট -->
-            <div id="studyHubViews" style="margin-top: 20px;"></div>
+            <!-- ui-data.js থেকে বই লোড হওয়ার জায়গা -->
+            <div id="studyHubViews"></div>
         </div>
 
         <!-- ৫. ভবিষ্যৎ প্ল্যান -->
@@ -193,22 +247,26 @@
             <h2>📲 সামাজিক যোগাযোগ মাধ্যমে যুক্ত হন</h2>
             <p>আমার সাথে যেকোনো সামাজিক মাধ্যমে যুক্ত হতে পারেন:</p>
 
-            <div class="social-links" id="socialLinksContainer">
-                <a href="https://facebook.com" target="_blank" class="btn-social btn-facebook"><i class="fa-brands fa-facebook"></i> Facebook</a>
-                <a href="https://twitter.com" target="_blank" class="btn-social btn-twitter"><i class="fa-brands fa-x-twitter"></i> Twitter</a>
-                <a href="https://instagram.com" target="_blank" class="btn-social btn-instagram"><i class="fa-brands fa-instagram"></i> Instagram</a>
-                <a href="https://linkedin.com" target="_blank" class="btn-social btn-linkedin"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
-            </div>
+            <div class="social-links" id="socialLinksContainer"></div>
         </div>
     </div>
 
-    <!-- JavaScript Links -->
+    <!-- JavaScript Files -->
     <script src="ui-data.js"></script>
     <script type="module" src="app.js"></script>
     <script src="sidebar.js"></script>
 
     <script>
-        // মতামত সেভ করার ফাংশন
+        // নোটিশ লাইক ও মতামত হ্যান্ডলিং
+        let likes = parseInt(localStorage.getItem('noticeLikes') || '0');
+        document.getElementById('likeCount').innerText = likes;
+
+        function likeNotice() {
+            likes++;
+            localStorage.setItem('noticeLikes', likes);
+            document.getElementById('likeCount').innerText = likes;
+        }
+
         function submitFeedback() {
             const input = document.getElementById("userFeedback");
             const msg = document.getElementById("feedbackSuccess");
