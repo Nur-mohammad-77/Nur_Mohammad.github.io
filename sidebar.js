@@ -1,26 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // ১. সাইডবার ও ৩-বার আইকনের ডায়নামিক সিএসএস
+    // ১. সাইডবার ও ৩-বার বাটন CSS ইন্জেক্ট করা
     const sidebarStyle = document.createElement("style");
     sidebarStyle.innerHTML = `
-        /* হেডার পজিশন অ্যাডজাস্টমেন্ট */
-        header { 
-            position: relative; 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* মূল হেডারের অরিজিনাল নেভিগেশন লুকিয়ে ফেলা */
-        header nav { 
-            display: none !important; 
-        }
-
-        /* ৩ bar আইকন স্টাইল */
+        /* ৩-বার বাটন হেডারের বাম পাশে সুন্দরভাবে বসানো */
         .menu-toggle-btn {
             position: absolute;
             left: 20px;
-            top: 25px;
-            font-size: 22px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
             cursor: pointer;
             color: white;
             background: #334155;
@@ -31,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         .menu-toggle-btn:hover { background: #2563eb; }
 
-        /* সাইডবার ড্রয়ার স্টাইল */
+        /* সাইডবার ড্রয়ার স্টাইল */
         .custom-sidebar {
             height: 100%;
             width: 270px;
@@ -59,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         .sidebar-close-btn:hover { color: white; }
 
-        /* সাইডবার লিঙ্ক স্টাইল */
+        /* সাইডবারের অপশন লিঙ্কসমূহ */
         .custom-sidebar a {
             padding: 14px 25px;
             text-decoration: none;
@@ -76,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
             padding-left: 32px;
         }
 
-        /* ওভারলে (ঝাপসা ব্যাকগ্রাউন্ড) */
+        /* ব্যাকগ্রাউন্ড অস্পষ্ট ব্যাকড্রপ (Overlay) */
         .sidebar-overlay {
             display: none;
             position: fixed;
@@ -91,34 +79,34 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
     document.head.appendChild(sidebarStyle);
 
-    // ২. ৩-বার বোতামটি অটোমেটিক হেডারে যোগ করা
+    // ২. ৩-বার বোতামটি হেডারে বসানো
     const header = document.querySelector("header");
     if (header) {
         const toggleBtn = document.createElement("div");
         toggleBtn.className = "menu-toggle-btn";
         toggleBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
-        toggleBtn.onclick = toggleNavSidebar;
-        header.insertBefore(toggleBtn, header.firstChild);
+        toggleBtn.onclick = window.toggleNavSidebar;
+        header.appendChild(toggleBtn);
     }
 
-    // ৩. সাইডবার এবং ওভারলে রেন্ডার করা
+    // ৩. সাইডবার এবং ওভারলে HTML বডিতে যুক্ত করা
     const sidebarHTML = `
         <div id="customSidebar" class="custom-sidebar">
-            <div class="sidebar-close-btn" onclick="toggleNavSidebar()"><i class="fa-solid fa-xmark"></i></div>
-            <a href="#" onclick="triggerSection('home')">🏠 হোম</a>
-            <a href="#" onclick="triggerSection('about')">👨‍💻 আমার সম্পর্কে</a>
-            <a href="#" onclick="triggerSection('projects')">🤖 প্রজেক্টসমূহ</a>
-            <a href="#" onclick="triggerSection('studyHub')">📚 জ্ঞান ও শিক্ষা হাব</a>
-            <a href="#" onclick="triggerSection('plans')">🚀 ভবিষ্যৎ প্ল্যান</a>
-            <a href="#" onclick="triggerSection('gallery')">📸 গ্যালারি</a>
-            <a href="#" onclick="triggerSection('contact')">📲 যোগাযোগ</a>
+            <div class="sidebar-close-btn" onclick="window.toggleNavSidebar()"><i class="fa-solid fa-xmark"></i></div>
+            <a href="javascript:void(0)" onclick="window.triggerSection('home')">🏠 হোম</a>
+            <a href="javascript:void(0)" onclick="window.triggerSection('about')">👨‍💻 আমার সম্পর্কে</a>
+            <a href="javascript:void(0)" onclick="window.triggerSection('projects')">🤖 প্রজেক্টসমূহ</a>
+            <a href="javascript:void(0)" onclick="window.triggerSection('studyHub')">📚 জ্ঞান ও শিক্ষা হাব</a>
+            <a href="javascript:void(0)" onclick="window.triggerSection('plans')">🚀 ভবিষ্যৎ প্ল্যান</a>
+            <a href="javascript:void(0)" onclick="window.triggerSection('gallery')">📸 গ্যালারি</a>
+            <a href="javascript:void(0)" onclick="window.triggerSection('contact')">📲 যোগাযোগ</a>
         </div>
-        <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleNavSidebar()"></div>
+        <div id="sidebarOverlay" class="sidebar-overlay" onclick="window.toggleNavSidebar()"></div>
     `;
     document.body.insertAdjacentHTML("beforeend", sidebarHTML);
 });
 
-// ৪. সাইডবার টগল ফাংশন
+// ৪. সাইডবার খোলা ও বন্ধ করার ফাংশন
 window.toggleNavSidebar = function () {
     const sidebar = document.getElementById("customSidebar");
     const overlay = document.getElementById("sidebarOverlay");
@@ -128,10 +116,23 @@ window.toggleNavSidebar = function () {
     }
 };
 
-// ৫. সেকশন পরিবর্তন ও সাইডবার অটো ক্লজ লজিক
+// ৫. সঠিকভাবে সেকশন সুইচ করা এবং সাইডবার বন্ধ করা
 window.triggerSection = function (sectionId) {
+    // আগের সব সক্রিয় সেকশন বন্ধ করা
+    const allSections = document.querySelectorAll('.section');
+    allSections.forEach(sec => sec.classList.remove('active'));
+
+    // টার্গেট সেকশন ওপেন করা
+    const targetSection = document.getElementById(sectionId);
+    if (targetSection) {
+        targetSection.classList.add('active');
+    }
+
+    // আপনার app.js এর মূল ফাংশন থাকলে সেটাও ডেকে নেওয়া
     if (typeof showSection === "function") {
         showSection(sectionId);
     }
-    toggleNavSidebar();
+
+    // সাইডবার বন্ধ করা
+    window.toggleNavSidebar();
 };
