@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // ১. সাইডবার ও ৩-বার বাটন CSS ইন্জেক্ট করা
     const sidebarStyle = document.createElement("style");
     sidebarStyle.innerHTML = `
-        /* ৩-বার বাটন হেডারের বাম পাশে সুন্দরভাবে বসানো */
+        /* ৩-বার বাটন হেডারের বাম পাশে বসানো */
         .menu-toggle-btn {
             position: absolute;
             left: 20px;
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         .menu-toggle-btn:hover { background: #2563eb; }
 
-        /* সাইডবার ড্রয়ার স্টাইল */
+        /* সাইডবার ড্রয়ার স্টাইল */
         .custom-sidebar {
             height: 100%;
             width: 270px;
@@ -116,21 +116,22 @@ window.toggleNavSidebar = function () {
     }
 };
 
-// ৫. সঠিকভাবে সেকশন সুইচ করা এবং সাইডবার বন্ধ করা
+// ৫. মূল app.js-এর সাথে সংযোগ বজায় রেখে সেকশন বদলানো
 window.triggerSection = function (sectionId) {
-    // আগের সব সক্রিয় সেকশন বন্ধ করা
-    const allSections = document.querySelectorAll('.section');
-    allSections.forEach(sec => sec.classList.remove('active'));
-
-    // টার্গেট সেকশন ওপেন করা
-    const targetSection = document.getElementById(sectionId);
-    if (targetSection) {
-        targetSection.classList.add('active');
-    }
-
-    // আপনার app.js এর মূল ফাংশন থাকলে সেটাও ডেকে নেওয়া
-    if (typeof showSection === "function") {
-        showSection(sectionId);
+    // অরিজিনাল হেডারের বাটনে ক্লিক করার মতো আচরণ সিমুলেট করা
+    const targetNavBtn = document.querySelector(`nav button[onclick*="'${sectionId}'"]`);
+    
+    if (targetNavBtn) {
+        targetNavBtn.click(); // এটি app.js এবং ui-data.js এর সব ডাটা ঠিকমতো লোড করে দেবে
+    } else {
+        // ব্যাকআপ সেকশন টগল (যদি না বাটন পাওয়া যায়)
+        const allSections = document.querySelectorAll('.section');
+        allSections.forEach(sec => sec.classList.remove('active'));
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) targetSection.classList.add('active');
+        if (typeof showSection === "function") {
+            showSection(sectionId);
+        }
     }
 
     // সাইডবার বন্ধ করা
