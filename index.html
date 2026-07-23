@@ -5,20 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>নুর মোহাম্মদ - অল-ইন-ওয়ান পোর্টফোলিও</title>
     
-    <!-- ৩-বার আইকনের জন্য Font Awesome Library -->
+    <!-- Font Awesome (৩-বার ও ক্রস আইকনের জন্য) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #f0f2f5; color: #333; text-align: center; }
-        header { background: linear-gradient(135deg, #1e293b, #0f172a); color: white; padding: 25px 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        
+        header { 
+            background: linear-gradient(135deg, #1e293b, #0f172a); 
+            color: white; 
+            padding: 30px 15px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
+            position: relative;
+        }
         header h1 { font-size: 28px; margin-bottom: 5px; }
-        nav { margin-top: 15px; display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; }
-        nav button { background: #334155; color: white; border: none; padding: 10px 18px; cursor: pointer; border-radius: 20px; font-size: 14px; font-weight: 600; transition: 0.3s; }
-        nav button:hover, nav button.btn-active { background: #2563eb; }
+        header p { color: #cbd5e1; font-size: 15px; }
+        
+        /* মূল হেডারের ন্যাপবার লুকিয়ে রাখা */
+        header nav { display: none !important; }
+
         .container { max-width: 850px; margin: 30px auto; padding: 0 15px; }
-        .section { display: none; background: white; padding: 30px; border-radius: 12px; text-align: left; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .active { display: block; }
+        
+        /* সেকশন কার্ড ডিজাইন (যা ভেঙে গিয়েছিল) */
+        .section { 
+            display: none; 
+            background: #ffffff; 
+            padding: 35px; 
+            border-radius: 12px; 
+            text-align: left; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+        }
+        .section.active { display: block !important; }
+        .section h2 { font-size: 22px; color: #0f172a; margin-bottom: 12px; }
         
         /* লগইন বক্স */
         .auth-card { border: 1px solid #cbd5e1; border-radius: 8px; padding: 25px; background: #f8fafc; max-width: 380px; margin: 20px auto; }
@@ -66,23 +85,8 @@
             color: #1e3a8a;
             line-height: 1.6;
         }
-        .like-container {
-            margin-top: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .btn-like {
-            background-color: #2563eb;
-            color: white;
-            border: none;
-            padding: 7px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 13px;
-            transition: background 0.2s;
-        }
+        .like-container { margin-top: 12px; display: flex; align-items: center; gap: 10px; }
+        .btn-like { background-color: #2563eb; color: white; border: none; padding: 7px 15px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 13px; transition: background 0.2s; }
         .btn-like:hover { background-color: #1d4ed8; }
 
         /* বইয়ের তালিকা স্টাইল */
@@ -193,7 +197,7 @@
     <!-- External JavaScript File Links -->
     <script src="ui-data.js"></script>
     <script type="module" src="app.js"></script>
-    <!-- নতুন সাইডবার ও ৩-বার মেনু লিঙ্ক -->
+    <!-- ৩-বার সাইডবারের স্ক্রিপ্ট -->
     <script src="sidebar.js"></script>
 </body>
 </html>
