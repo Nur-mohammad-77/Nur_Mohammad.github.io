@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // ১. CSS ইন্জেক্ট করা
+    // ১. সাইডবার স্টাইল
     const sidebarStyle = document.createElement("style");
     sidebarStyle.innerHTML = `
         .menu-toggle-btn {
@@ -88,20 +88,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const sidebarHTML = `
         <div id="customSidebar" class="custom-sidebar">
             <div class="sidebar-close-btn" onclick="window.toggleNavSidebar()"><i class="fa-solid fa-xmark"></i></div>
-            <a href="javascript:void(0)" onclick="window.triggerSection('home')">🏠 হোম</a>
-            <a href="javascript:void(0)" onclick="window.triggerSection('about')">👨‍💻 আমার সম্পর্কে</a>
-            <a href="javascript:void(0)" onclick="window.triggerSection('projects')">🤖 প্রজেক্টসমূহ</a>
-            <a href="javascript:void(0)" onclick="window.triggerSection('studyHub')">📚 জ্ঞান ও শিক্ষা হাব</a>
-            <a href="javascript:void(0)" onclick="window.triggerSection('plans')">🚀 ভবিষ্যৎ প্ল্যান</a>
-            <a href="javascript:void(0)" onclick="window.triggerSection('gallery')">📸 গ্যালারি</a>
-            <a href="javascript:void(0)" onclick="window.triggerSection('contact')">📲 যোগাযোগ</a>
+            <a href="javascript:void(0)" onclick="window.triggerNav('home')">🏠 হোম</a>
+            <a href="javascript:void(0)" onclick="window.triggerNav('about')">👨‍💻 আমার সম্পর্কে</a>
+            <a href="javascript:void(0)" onclick="window.triggerNav('projects')">🤖 প্রজেক্টসমূহ</a>
+            <a href="javascript:void(0)" onclick="window.triggerNav('studyHub')">📚 জ্ঞান ও শিক্ষা হাব</a>
+            <a href="javascript:void(0)" onclick="window.triggerNav('plans')">🚀 ভবিষ্যৎ প্ল্যান</a>
+            <a href="javascript:void(0)" onclick="window.triggerNav('gallery')">📸 গ্যালারি</a>
+            <a href="javascript:void(0)" onclick="window.triggerNav('contact')">📲 যোগাযোগ</a>
         </div>
         <div id="sidebarOverlay" class="sidebar-overlay" onclick="window.toggleNavSidebar()"></div>
     `;
     document.body.insertAdjacentHTML("beforeend", sidebarHTML);
 });
 
-// ৪. সাইডবার ওপেন/ক্লোজ
+// টগল ফাংশন
 window.toggleNavSidebar = function () {
     const sidebar = document.getElementById("customSidebar");
     const overlay = document.getElementById("sidebarOverlay");
@@ -111,29 +111,21 @@ window.toggleNavSidebar = function () {
     }
 };
 
-// ৫. মূলui-data.js ও app.js এর অরিজিনাল ফাংশনগুলোকে ট্রিগার করা
-window.triggerSection = function (sectionId) {
+// নেভিগেশন ট্রিগার
+window.triggerNav = function (sectionId) {
+    // অরিজিনাল নেভিগেশন বাটন খুঁজে ক্লিক করা
     const navButtons = document.querySelectorAll("header nav button");
-    let found = false;
-
+    let clicked = false;
     navButtons.forEach(btn => {
-        if (btn.getAttribute("onclick") && btn.getAttribute("onclick").includes(sectionId)) {
+        const attr = btn.getAttribute("onclick");
+        if (attr && attr.includes(sectionId)) {
             btn.click();
-            found = true;
+            clicked = true;
         }
     });
 
-    if (!found) {
-        const allSections = document.querySelectorAll('.section');
-        allSections.forEach(sec => sec.classList.remove('active'));
-        const targetSection = document.getElementById(sectionId);
-        if (targetSection) targetSection.classList.add('active');
-        if (typeof showSection === "function") showSection(sectionId);
-    }
-
-    // ব্যাক থাকলে শিক্ষা হাব মেইন ক্যাটাগরিতে ফেরত নেওয়া
-    if (sectionId === 'studyHub' && typeof closeStudyFolder === 'function') {
-        closeStudyFolder();
+    if (!clicked && typeof showSection === "function") {
+        showSection(sectionId);
     }
 
     window.toggleNavSidebar();
