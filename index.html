@@ -3,368 +3,393 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ডিজিটাল পাঠ্যপুস্তক লাইব্রেরি | Class 1-10 Books</title>
+    <title>নুর মোহাম্মদ - অল-ইন-ওয়ান পোর্টফোলিও</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f0f2f5; color: #333; text-align: center; }
+        header { background: linear-gradient(135deg, #1e293b, #0f172a); color: white; padding: 25px 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        header h1 { font-size: 28px; margin-bottom: 5px; }
+        nav { margin-top: 15px; display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; }
+        nav button { background: #334155; color: white; border: none; padding: 10px 18px; cursor: pointer; border-radius: 20px; font-size: 14px; font-weight: 600; transition: 0.3s; }
+        nav button:hover, nav button.btn-active { background: #2563eb; }
+        .container { max-width: 850px; margin: 30px auto; padding: 0 15px; }
+        .section { display: none; background: white; padding: 30px; border-radius: 12px; text-align: left; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .active { display: block; }
+        
+        /* লগইন বক্স */
+        .auth-card { border: 1px solid #cbd5e1; border-radius: 8px; padding: 25px; background: #f8fafc; max-width: 380px; margin: 20px auto; }
+        .auth-card input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #cbd5e1; border-radius: 6px; outline: none; }
+        
+        /* প্রজেক্ট একর্ডিয়ন বর্ডার ও হেডার */
+        .project-card { border: 1px solid #cbd5e1; border-radius: 8px; margin-top: 15px; background: #ffffff; overflow: hidden; }
+        .project-header { background: #f1f5f9; padding: 15px 20px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; transition: background 0.2s; }
+        .project-header:hover { background: #e2e8f0; }
+        .project-content { display: none; padding: 20px; border-top: 1px solid #cbd5e1; background: #fafafa; }
+        
+        .btn-action { width: 100%; padding: 10px; background-color: #2563eb; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 15px; }
+        .btn-logout { width: auto; padding: 8px 16px; background-color: #ef4444; }
+        
+        iframe { width: 100%; height: 480px; border: none; border-radius: 8px; margin-top: 15px; }
+        .error-text { color: #ef4444; font-size: 13px; font-weight: bold; margin-top: 8px; text-align: center; }
 
-        body {
-            background-color: #f4f7f6;
-            color: #333;
-            line-height: 1.6;
-        }
+        /* সোশ্যাল মিডিয়া বাটন স্টাইল */
+        .social-links { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
+        .btn-social { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px; transition: transform 0.2s, opacity 0.2s; }
+        .btn-social:hover { transform: translateY(-2px); opacity: 0.9; }
+        .btn-facebook { background-color: #1877F2; }
+        .btn-twitter { background-color: #000000; }
+        .btn-instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+        .btn-linkedin { background-color: #0A66C2; }
 
-        header {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
+        /* স্টাডি / লাইব্রেরি হাব স্টাইল */
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-top: 20px; }
+        .hub-card { background: #f8fafc; border: 1px solid #e2e8f0; padding: 20px; border-radius: 10px; text-align: center; cursor: pointer; transition: 0.2s; font-weight: 600; }
+        .hub-card:hover { background: #eff6ff; border-color: #2563eb; transform: translateY(-3px); }
+        .hub-card span { font-size: 28px; display: block; margin-bottom: 8px; }
+        .back-btn { background: #64748b; color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; margin-bottom: 15px; font-weight: 600; }
+        .resource-box { background: #f1f5f9; padding: 15px; border-radius: 8px; margin-top: 10px; }
+        .resource-box h4 { margin-bottom: 8px; color: #1e293b; }
 
-        header h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-
-        .class-section {
-            background: white;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            overflow: hidden;
-        }
-
-        .class-header {
-            background: #ffffff;
-            padding: 18px 25px;
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #1e3c72;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-left: 5px solid #2a5298;
-            transition: background 0.3s ease;
-        }
-
-        .class-header:hover {
-            background: #f0f4f9;
-        }
-
-        .class-header span.icon {
-            font-size: 1.2rem;
-            transition: transform 0.3s ease;
-        }
-
-        .class-content {
-            display: none;
-            padding: 20px;
-            background: #fafafa;
-            border-top: 1px solid #eee;
-        }
-
-        .book-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 15px;
-        }
-
-        .book-card {
-            background: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 6px;
-            padding: 15px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .book-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .book-title {
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: #2c3e50;
-            font-size: 1rem;
-        }
-
-        .download-btn {
-            display: inline-block;
-            background: #27ae60;
-            color: white;
-            text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: background 0.2s;
-        }
-
-        .download-btn:hover {
-            background: #219150;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: #666;
-            font-size: 0.9rem;
-            margin-top: 40px;
-        }
-
-        /* Active Accordion Styling */
-        .class-section.active .class-content {
-            display: block;
-        }
-
-        .class-section.active .class-header {
-            background: #eef3fb;
-        }
-
-        .class-section.active .icon {
-            transform: rotate(180deg);
-        }
+        /* বইয়ের তালিকা স্টাইল */
+        .book-list { list-style: none; padding: 0; margin-top: 10px; }
+        .book-item { display: flex; justify-content: space-between; align-items: center; background: white; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 6px; margin-bottom: 8px; font-size: 14px; font-weight: 500; }
+        .book-item a { background-color: #2563eb; color: white; text-decoration: none; padding: 5px 12px; border-radius: 4px; font-size: 12px; font-weight: 600; transition: background 0.2s; }
+        .book-item a:hover { background-color: #1d4ed8; }
     </style>
+
+    <!-- Firebase SDK Modules -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAxwXrdpLQGrrV-njkWnrdfrb5jNvOklX8",
+            authDomain: "nur-microtech.firebaseapp.com",
+            projectId: "nur-microtech",
+            storageBucket: "nur-microtech.firebasestorage.app",
+            messagingSenderId: "411818921094",
+            appId: "1:411818921094:web:9822cf69b597c9d69e1507",
+            measurementId: "G-Q31Y82RRH6"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        
+        const BACKEND_URL = "https://nur-micro-tech-github-io.vercel.app/api/get-project";
+
+        window.loginUser = function() {
+            const email = document.getElementById('emailInput').value;
+            const password = document.getElementById('passInput').value;
+            const errMsg = document.getElementById('errMsg');
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then(() => { errMsg.innerText = ""; })
+                .catch(() => { errMsg.innerText = "ভুল ইমেইল অথবা পাসওয়ার্ড!"; });
+        };
+
+        window.logoutUser = function() { signOut(auth); };
+
+        onAuthStateChanged(auth, (user) => {
+            const loginBox = document.getElementById('loginBox');
+            const protectedProjects = document.getElementById('protectedProjects');
+
+            if (user) {
+                loginBox.style.display = "none";
+                protectedProjects.style.display = "block";
+            } else {
+                loginBox.style.display = "block";
+                protectedProjects.style.display = "none";
+                document.getElementById('p1-container').innerHTML = "";
+            }
+        });
+
+        window.loadSecureProject = async function(projectId, containerId) {
+            const container = document.getElementById(containerId);
+            if (container.innerHTML.trim() !== "") return;
+
+            const user = auth.currentUser;
+            if (!user) return;
+
+            container.innerHTML = "<p style='color:#2563eb; font-weight:bold;'>সার্ভার থেকে নিরাপদে ডাটা লোড হচ্ছে...</p>";
+
+            try {
+                const token = await user.getIdToken();
+                const response = await fetch(`${BACKEND_URL}?id=${projectId}`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    container.innerHTML = `<p>আমার তৈরি প্রথম সিকিউর সার্কিট সিমুলেশন প্রজেক্ট:</p><iframe src="${result.data.iframeUrl}"></iframe>`;
+                } else {
+                    container.innerHTML = `<p style="color:red;">অ্যাক্সেস মেলেনি: ${result.error}</p>`;
+                }
+            } catch (err) {
+                container.innerHTML = `<p style="color:red;">সার্ভার কানেকশনে সমস্যা হয়েছে!</p>`;
+            }
+        };
+    </script>
 </head>
 <body>
 
     <header>
-        <h1>ডিজিটাল পাঠ্যপুস্তক লাইব্রেরি</h1>
-        <p>১ম থেকে ১০ম শ্রেণীর সকল এনসিটিবি (NCTB) বোর্ড বই অনলাইনে পড়ুন বা ডাউনলোড করুন</p>
+        <h1>নুর মোহাম্মদ 👋</h1>
+        <p>ওয়েব, টেকনোলজি ও প্রজেক্ট হাব</p>
+        <nav>
+            <button class="nav-btn btn-active" onclick="showSection('home', this)">হোম</button>
+            <button class="nav-btn" onclick="showSection('about', this)">আমার সম্পর্কে</button>
+            <button class="nav-btn" onclick="showSection('projects', this)">প্রজেক্টসমূহ</button>
+            <button class="nav-btn" onclick="showSection('studyHub', this)">জ্ঞান ও শিক্ষা হাব 📚</button>
+            <button class="nav-btn" onclick="showSection('plans', this)">ভবিষ্যৎ প্ল্যান</button>
+            <button class="nav-btn" onclick="showSection('gallery', this)">গ্যালারি</button>
+            <button class="nav-btn" onclick="showSection('contact', this)">যোগাযোগ</button>
+        </nav>
     </header>
 
     <div class="container">
+        <!-- ১. হোম -->
+        <div id="home" class="section active">
+            <h2>🏠 স্বাগতম!</h2>
+            <p>আমার ব্যক্তিগত প্রজেক্ট পোরটফোলিওতে আপনাকে স্বাগতম।</p>
+        </div>
 
-        <!-- Class 1 -->
-        <div class="class-section">
-            <div class="class-header" onclick="toggleSection(this)">
-                <span>Class 1 (প্রথম শ্রেণী)</span>
-                <span class="icon">▼</span>
+        <!-- ২. আমার সম্পর্কে -->
+        <div id="about" class="section">
+            <h2>👨‍💻 আমার সম্পর্কে</h2>
+            <p>আমি নুর মোহাম্মদ। টেকনোলজি, ওয়েব ডেভলপমেন্ট এবং ইলেকট্রনিক্স নিয়ে কাজ করতে পছন্দ করি।</p>
+        </div>
+
+        <!-- ৩. সিকিউর প্রজেক্ট সেকশন -->
+        <div id="projects" class="section">
+            <h2>🤖 সিকিউর প্রজেক্টসমূহ 🔒</h2>
+            
+            <div id="loginBox" class="auth-card">
+                <h3>এডমিন লগইন</h3>
+                <input type="email" id="emailInput" placeholder="ইমেইল লিখুন">
+                <input type="password" id="passInput" placeholder="পাসওয়ার্ড লিখুন">
+                <button class="btn-action" onclick="loginUser()">লগইন করুন</button>
+                <div id="errMsg" class="error-text"></div>
             </div>
-            <div class="class-content">
-                <div class="book-grid">
-                    <div class="book-card"><div class="book-title">আমার বাংলা বই</div><a href="https://drive.google.com/file/d/1BlBcoyyZdG_VNMoDdnpIMVilIW8WAFBF/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">English for Today</div><a href="https://drive.google.com/file/d/1Lo5a-Db4_3Q76lve6hn3qfrTCzfQoDYs/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">প্রাথমিক গণিত</div><a href="https://drive.google.com/file/d/19Hf4I1vMwfDCRrF61V8Gn7M-xLyPnuH2/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
+
+            <div id="protectedProjects" style="display: none;">
+                <div style="text-align: right; margin-bottom: 15px;">
+                    <button class="btn-action btn-logout" onclick="logoutUser()">🔓 লগআউট করুন</button>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header" onclick="toggleProject('p1', 'p1-container', 'p1', this)">
+                        <span>📦 Project-1: IoT Smart Medicine Box</span>
+                        <span class="icon">🔽</span>
+                    </div>
+                    <div id="p1" class="project-content">
+                        <div id="p1-container"></div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Class 2 -->
-        <div class="class-section">
-            <div class="class-header" onclick="toggleSection(this)">
-                <span>Class 2 (দ্বিতীয় শ্রেণী)</span>
-                <span class="icon">▼</span>
+        <!-- ৪. জ্ঞান ও শিক্ষা হাব -->
+        <div id="studyHub" class="section">
+            <h2>📚 ডিজিটাল জ্ঞান ও শিক্ষা হাব</h2>
+            <p>এখানে সব ধরণের বই, লেকচার নোটস ও ক্লাস রেকর্ড সুসংগঠিত রয়েছে:</p>
+
+            <!-- লেভেল ১: মূল ক্যাটাগরি -->
+            <div id="hubMainCategories" class="grid-container">
+                <div class="hub-card" onclick="openStudyFolder('academicView')">
+                    <span>🏫</span> একাডেমি (Class 1 - 12)
+                </div>
+                <div class="hub-card" onclick="openStudyFolder('ieltsView')">
+                    <span>🇬🇧</span> IELTS প্রিপারেশন
+                </div>
+                <div class="hub-card" onclick="openStudyFolder('islamicView')">
+                    <span>🕌</span> ইসলামিক বই
+                </div>
+                <div class="hub-card" onclick="openStudyFolder('literatureView')">
+                    <span>📖</span> সাহিত্য ও অন্যান্য
+                </div>
             </div>
-            <div class="class-content">
-                <div class="book-grid">
-                    <div class="book-card"><div class="book-title">আমার বাংলা বই</div><a href="https://drive.google.com/file/d/1rTfp1Xja0vVpQo248CsmFa73jdj9l-Cw/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">English for Today</div><a href="https://drive.google.com/file/d/1K-efm2y7alesM1N-rLmKFESX-ZPamOzY/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">প্রাথমিক গণিত</div><a href="https://drive.google.com/file/d/1WAJds1ocCoZR4rdo42BRieV3Dgpvz-Xy/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
+
+            <!-- লেভেল ২: একাডেমি (ক্লাস ১-১২ তালিকা) -->
+            <div id="academicView" style="display: none; margin-top: 15px;">
+                <button class="back-btn" onclick="backToHubMain()">🔙 মূল ক্যাটাগরিতে ফিরুন</button>
+                <h3>🏫 একাডেমি ক্লাস বেছে নিন</h3>
+                <div class="grid-container" id="classListGrid"></div>
+            </div>
+
+            <!-- লেভেল ৩: নির্দিষ্ট ক্লাসের ভেতরের বইয়ের তালিকা -->
+            <div id="classDetailView" style="display: none; margin-top: 15px;">
+                <button class="back-btn" onclick="backToAcademic()">🔙 ক্লাস তালিকায় ফিরুন</button>
+                <h3 id="selectedClassTitle"></h3>
+                
+                <div class="resource-box">
+                    <h4>📄 বোর্ড বই (NCTB Board Books)</h4>
+                    <ul class="book-list" id="boardBooksContainer"></ul>
+                </div>
+
+                <div class="resource-box">
+                    <h4>📖 গাইড ও নোটস (Guide Books & Notes)</h4>
+                    <p>অধ্যায়ভিত্তিক গাইড ও হ্যান্ডনোটস শীঘ্রই আপলোড করা হবে...</p>
+                </div>
+                <div class="resource-box">
+                    <h4>🎥 ভিডিও ক্লাসেস (Class Records)</h4>
+                    <p>অধ্যায়ভিত্তিক ক্লাস ভিডিও রেকর্ডস খুব শীঘ্রই যুক্ত হবে...</p>
+                </div>
+            </div>
+
+            <!-- অন্যান্য ক্যাটাগরির ফোল্ডার ভিউ -->
+            <div id="ieltsView" style="display: none; margin-top: 15px;">
+                <button class="back-btn" onclick="backToHubMain()">🔙 মূল ক্যাটাগরিতে ফিরুন</button>
+                <h3>🇬🇧 IELTS Preparation Hub</h3>
+                <div class="resource-box">
+                    <h4>📚 Cambridge Books & Materials</h4>
+                    <p>পিডিএফ বই ও লিসেনিং অডিও ফাইলসমূহ...</p>
+                </div>
+            </div>
+
+            <div id="islamicView" style="display: none; margin-top: 15px;">
+                <button class="back-btn" onclick="backToHubMain()">🔙 মূল ক্যাটাগরিতে ফিরুন</button>
+                <h3>🕌 ইসলামিক বই ও তাফসীর</h3>
+                <div class="resource-box">
+                    <h4>📖 তাফসীর ও হাদিস গ্রন্থ</h4>
+                    <p>সংগৃহীত ইসলামিক পিডিএফ বইসমূহ...</p>
+                </div>
+            </div>
+
+            <div id="literatureView" style="display: none; margin-top: 15px;">
+                <button class="back-btn" onclick="backToHubMain()">🔙 মূল ক্যাটাগরিতে ফিরুন</button>
+                <h3>📖 সাহিত্য ও অন্যান্য উপন্যাস</h3>
+                <div class="resource-box">
+                    <h4>🖋️ গল্প ও সাহিত্য সম্ভার</h4>
+                    <p>দেশি-বিদেশি বিখ্যাত উপন্যাস ও কবিতার বই...</p>
                 </div>
             </div>
         </div>
 
-        <!-- Class 3 -->
-        <div class="class-section">
-            <div class="class-header" onclick="toggleSection(this)">
-                <span>Class 3 (তৃতীয় শ্রেণী)</span>
-                <span class="icon">▼</span>
-            </div>
-            <div class="class-content">
-                <div class="book-grid">
-                    <div class="book-card"><div class="book-title">আমার বাংলা বই</div><a href="https://drive.google.com/file/d/1HQvShhpaXB2dy9jhi2KShmc7Cy4NeQ_h/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">English for Today</div><a href="https://drive.google.com/file/d/1aPOc8qmuJy9WIjOFuVmuHvqhbcqTmYmS/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">প্রাথমিক গণিত</div><a href="https://drive.google.com/file/d/13Aq8yYot7bVTkjJhcMjnecJm8L9cT9Yn/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">প্রাথমিক বিজ্ঞান</div><a href="https://drive.google.com/file/d/1yQT6T4IWGJsRNkz11wVLf6a9YW1AFgGF/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">বাংলাদেশ ও বিশ্বপরিচয়</div><a href="https://drive.google.com/file/d/1KiKpu34cp1cgFVmW5dBJLlzkcJXGp4Op/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">ধর্ম শিক্ষা</div><a href="https://drive.google.com/file/d/1eqn0qDp9E4wsswwLmTDhue3pIFxlrDTF/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                </div>
-            </div>
+        <!-- ৫. ভবিষ্যৎ প্ল্যান -->
+        <div id="plans" class="section">
+            <h2>🚀 ভবিষ্যৎ পরিকল্পনা</h2>
+            <p>সামনে আরও নতুন নতুন IoT ও ওয়েব প্রজেক্ট তৈরি করার ইচ্ছা আছে।</p>
         </div>
 
-        <!-- Class 4 -->
-        <div class="class-section">
-            <div class="class-header" onclick="toggleSection(this)">
-                <span>Class 4 (চতুর্থ শ্রেণী)</span>
-                <span class="icon">▼</span>
-            </div>
-            <div class="class-content">
-                <div class="book-grid">
-                    <div class="book-card"><div class="book-title">আমার বাংলা বই</div><a href="https://drive.google.com/file/d/1KlZpvzj4_5_92ome4V0oBoU_P1jUzLof/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">English for Today</div><a href="https://drive.google.com/file/d/1lvLw6JnqqWFukGFMBaa7Tau690SLUtRk/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">প্রাথমিক গণিত</div><a href="https://drive.google.com/file/d/1vkL-b0X8NthBYavweDtyIBjl6GRha9Tz/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">প্রাথমিক বিজ্ঞান</div><a href="https://drive.google.com/file/d/1o0DpXrkjVbYkyerkUcBa-ioRu1mfX1VJ/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">বাংলাদেশ ও বিশ্বপরিচয়</div><a href="https://drive.google.com/file/d/1oBLMU_SXjZZ8OA8dvKMSh2dioX0ednw_/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">ধর্ম শিক্ষা</div><a href="https://drive.google.com/file/d/15_2cIyC5uGTFUY17j5bQJLBvnZT9eLNf/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                </div>
-            </div>
+        <!-- ৬. গ্যালারি -->
+        <div id="gallery" class="section">
+            <h2>📸 গ্যালারি</h2>
+            <p>এখানে প্রজেক্টের ছবি যুক্ত করা হবে।</p>
         </div>
 
-        <!-- Class 5 -->
-        <div class="class-section">
-            <div class="class-header" onclick="toggleSection(this)">
-                <span>Class 5 (পঞ্চম শ্রেণী)</span>
-                <span class="icon">▼</span>
-            </div>
-            <div class="class-content">
-                <div class="book-grid">
-                    <div class="book-card"><div class="book-title">আমার বাংলা বই</div><a href="https://drive.google.com/file/d/1aZWJ5ofGwUzke5jv2Z0JYRdv80SScbEw/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">English for Today</div><a href="https://drive.google.com/file/d/1LGsHMPGJ7CPMnxwMVdRwBRWRt15dmTFM/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">প্রাথমিক গণিত</div><a href="https://drive.google.com/file/d/1rEj786v4dHTdH1KPXd-ZnEn10MByuyP-/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">প্রাথমিক বিজ্ঞান</div><a href="https://drive.google.com/file/d/1pu4oMxE6HZurY3D-KRTW4MLDOrDpKKwC/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">বাংলাদেশ ও বিশ্বপরিচয়</div><a href="https://drive.google.com/file/d/1T-d8a0b1PMHTXa6OHP5573vXuvzTFwee/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">ধর্ম শিক্ষা</div><a href="https://drive.google.com/file/d/10_me063U9tNcwI5kRI853AWwTPsdQoCR/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                </div>
+        <!-- ৭. যোগাযোগ -->
+        <div id="contact" class="section">
+            <h2>📲 সামাজিক যোগাযোগ মাধ্যমে যুক্ত হন</h2>
+            <p>আমার সাথে যেকোনো সামাজিক মাধ্যমে যুক্ত হতে পারেন:</p>
+
+            <div class="social-links">
+                <a href="https://www.facebook.com/musafir.nurm514" target="_blank" class="btn-social btn-facebook">
+                    📘 Facebook
+                </a>
+                <a href="https://twitter.com" target="_blank" class="btn-social btn-twitter">
+                    🐦 Twitter (X)
+                </a>
+                <a href="https://www.instagram.com" target="_blank" class="btn-social btn-instagram">
+                    📸 Instagram
+                </a>
+                <a href="https://www.linkedin.com" target="_blank" class="btn-social btn-linkedin">
+                    💼 LinkedIn
+                </a>
             </div>
         </div>
-
-        <!-- Class 6 -->
-        <div class="class-section">
-            <div class="class-header" onclick="toggleSection(this)">
-                <span>Class 6 (ষষ্ঠ শ্রেণী)</span>
-                <span class="icon">▼</span>
-            </div>
-            <div class="class-content">
-                <div class="book-grid">
-                    <div class="book-card"><div class="book-title">বাংলা আনন্দপাঠ</div><a href="https://drive.google.com/file/d/14jvbgh3TN3xQTmgHTuw4Wnr3PuuKBd8j/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">বাংলা ভাষার ব্যাকরণ</div><a href="https://drive.google.com/file/d/1DDruTWkKbKapnqNvY8GNbnYKqttjmmR9/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">বাংলা চারুপাঠ</div><a href="https://drive.google.com/file/d/1j2MTJX3Qdy5QZJXCqPRrT9ZYQyysTQle/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">English for Today</div><a href="https://drive.google.com/file/d/1kRXsFrw7zKuYHyVQom81yYlv5ssM6Jms/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">English Grammar</div><a href="https://drive.google.com/file/d/1xAS6MkaX7N3chNP7Ri8V55T48xYMKR2y/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">গণিত</div><a href="https://drive.google.com/file/d/1xWpWJiMlFsw3P3J-jzXWrOMGD65ZxOVZ/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">বিজ্ঞান</div><a href="https://drive.google.com/file/d/11a-rtlpOxF2NiawlCMu9lL1RPThnfxgQ/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">গার্হস্থ্য বিজ্ঞান</div><a href="https://drive.google.com/file/d/1aMQdN-4zJahFhOMMx0s_R2uhv5lifEiT/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">বাংলাদেশ ও বিশ্বপরিচয়</div><a href="https://drive.google.com/file/d/1YDt4yqapb0W0dS8Cf7QxyXdf3I2qEeB9/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">ICT</div><a href="https://drive.google.com/file/d/119Q8c67rpBL0iXxxCsFes_35TOO_X3tr/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">ধর্ম শিক্ষা</div><a href="https://drive.google.com/file/d/14AXR_mujPlzAEhy8MV7sOEtdtcckzLI8/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">কৃষি শিক্ষা</div><a href="https://drive.google.com/file/d/1zIQ2WDG2P4a0MAdrDCsIf3Zj7o_8tIR_/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">কর্ম ও জীবনমুখী শিক্ষা</div><a href="https://drive.google.com/file/d/1WHPa59IALGqA0D0dGAQaxgE4C5XX74-E/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">শারীরিক শিক্ষা ও স্বাস্থ্য</div><a href="https://drive.google.com/file/d/1gw-dExUhmum174wn4E4Ve_vOINTT0skv/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Class 7 -->
-        <div class="class-section">
-            <div class="class-header" onclick="toggleSection(this)">
-                <span>Class 7 (সপ্তম শ্রেণী)</span>
-                <span class="icon">▼</span>
-            </div>
-            <div class="class-content">
-                <div class="book-grid">
-                    <div class="book-card"><div class="book-title">বাংলা আনন্দপাঠ</div><a href="https://drive.google.com/file/d/1ZANoS8O26D5SIJ8PftDuWMQyNiQJyfw0/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">বাংলা সপ্তবর্ণা</div><a href="https://drive.google.com/file/d/1hiyvbcr_g9H9J4-FHjyOiwlKajqxon_r/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">বাংলা ব্যাকরণ</div><a href="https://drive.google.com/file/d/14TteP9mLClVetMZP2nUxeOGfvq6r0tDW/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">English for Today</div><a href="https://drive.google.com/file/d/1EeR_jc5mFyQcoTMrq_19f3wuR1xTCmYU/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">English Grammar</div><a href="https://drive.google.com/file/d/14ZhaoXMmtdxqBz5FzbgxcFAyfEzD78ss/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">গণিত</div><a href="https://drive.google.com/file/d/1YsGY0glsjK2OM9q6x_yJm3uThmO9lHwH/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">বিজ্ঞান</div><a href="https://drive.google.com/file/d/1IoDTeTPU2g_3yoOFUGvg35o4Dj0FncrW/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">বাংলাদেশ ও বিশ্বপরিচয়</div><a href="https://drive.google.com/file/d/1hLCY2mv-zmjhwQWqtdiC9j1LBgyVX97m/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">ICT</div><a href="https://drive.google.com/file/d/1024u47BAL2TaX2nBug8jxDfLQgTPCiEA/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">কৃষি শিক্ষা</div><a href="https://drive.google.com/file/d/1vBg-xoJmseU7p7f8T1nfl4hXCWD2OilL/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">ধর্ম শিক্ষা</div><a href="https://drive.google.com/file/d/12M96UXW4gPNsuewOQpQUvK7rBm9u7TMj/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Class 8 -->
-        <div class="class-section">
-            <div class="class-header" onclick="toggleSection(this)">
-                <span>Class 8 (অষ্টম শ্রেণী)</span>
-                <span class="icon">▼</span>
-            </div>
-            <div class="class-content">
-                <div class="book-grid">
-                    <div class="book-card"><div class="book-title">বাংলা আনন্দপাঠ</div><a href="https://drive.google.com/file/d/1zyKHky-GuFlrhHnZTpJ54h_4NLG0Johh/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">বাংলা সাহিত্য কণিকা</div><a href="https://drive.google.com/file/d/1QDNdE6LJB-n6qU7Y5hV_cACrtQ9jzB-V/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">বাংলা ভাষার ব্যাকরণ</div><a href="https://drive.google.com/file/d/16pktB40s09ZXI1TeXfTYAB2rOMfc5SSE/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">English for Today</div><a href="https://drive.google.com/file/d/1tJHhgS20BcHdLJuJeQ3JgotnQ_CO1YdS/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">English Grammar</div><a href="https://drive.google.com/file/d/1YmB-F6fD5VHkEqLlsh54WvnMk3UX5Ddh/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">গণিত</div><a href="https://drive.google.com/file/d/1xugkiY_lKCYlt-YhSYJniHXo6ni2tOgx/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">বিজ্ঞান</div><a href="https://drive.google.com/file/d/1GIfoOTNp58IByEdPjVPhXs3BcGn8cuIs/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">বাংলাদেশ ও বিশ্বপরিচয়</div><a href="https://drive.google.com/file/d/1XYMyiATugT7piNrnzJzuRZ1Mp-caedqW/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">ICT</div><a href="https://drive.google.com/file/d/1lPPff0v8-Ca8ulIkC5bK7nSq1GT5XKI8/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">ধর্ম শিক্ষা</div><a href="https://drive.google.com/file/d/1sldGoN_VCDjT-jyJ_NgLQKNnKhIoEuZc/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">কৃষি শিক্ষা</div><a href="https://drive.google.com/file/d/10xdzsmoWdsXojNKXgwxT2zBnCDCJcpRW/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Class 9-10 -->
-        <div class="class-section">
-            <div class="class-header" onclick="toggleSection(this)">
-                <span>Class 9-10 (নবম-দশম শ্রেণী)</span>
-                <span class="icon">▼</span>
-            </div>
-            <div class="class-content">
-                <div class="book-grid">
-                    <div class="book-card"><div class="book-title">বাংলা সাহিত্য (১ম পত্র)</div><a href="https://drive.google.com/file/d/1eyBNQNnP0jftgFjwCjqWy18SXkvKSVSq/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">বাংলা সহপাঠ</div><a href="https://drive.google.com/file/d/1x0KUCvrzK1ttFh5LbzDVYGpATa3_hyxz/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">বাংলা ২য় পত্র</div><a href="https://drive.google.com/file/d/1BixEfhk9Msxn4nl_2C3Ci2QmRFQYbqCw/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">English 1st Paper</div><a href="https://drive.google.com/file/d/1vEkgiFiTOhUbkiQJs31NnpJiDDmWporR/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">English 2nd Paper</div><a href="https://drive.google.com/file/d/16pzd04Jq0As8q7FPay3nS_9EaZU6Fu37/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">সাধারণ গণিত</div><a href="https://drive.google.com/file/d/1ys13mcajGTqahF6355HkoIxvc0MGUbWr/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">সাধারণ বিজ্ঞান</div><a href="https://drive.google.com/file/d/1KHGA4FRM7Iij4nTNHBSTPrM-uMcq3Q6_/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">ICT</div><a href="https://drive.google.com/file/d/1PMRFrwFy8Z15ZCPpPjpJQ-TFmyo1A2pG/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">বাংলাদেশ ও বিশ্বপরিচয়</div><a href="https://drive.google.com/file/d/1mUQ-Ge6Exjgx1Dyq_sGZx7CRFebwXJie/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">পদার্থবিজ্ঞান (Physics)</div><a href="https://drive.google.com/file/d/1dHBi26ayw-rTXMfAX-NpXLObKCZ8fDYT/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">রসায়ন (Chemistry)</div><a href="https://drive.google.com/file/d/1qJAs0J4Ns0M7fYFA4u1E-Mx3uQTSqSCW/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">জীববিজ্ঞান (Biology)</div><a href="https://drive.google.com/file/d/1bvFWH4yJZQFMkfwH8Jah94Yd_F0rcQ4P/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">উচ্চতর গণিত</div><a href="https://drive.google.com/file/d/1ZtfguyqMjxyb0SUjXVAAmPIokd8bFOhZ/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">হিসাববিজ্ঞান</div><a href="https://drive.google.com/file/d/1KldHEF2WQjxXTtF3GMjVVWcvmzvxoKN4/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">ব্যবসায় উদ্যোগ</div><a href="https://drive.google.com/file/d/1vPTB4B5zTZjAhRF2FIfiGTwow3imBMw2/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">ফিন্যান্স ও ব্যাংকিং</div><a href="https://drive.google.com/file/d/1T0MdFHpBQnk_JY08RSmrUMbYWk70oy-E/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">ভূগোল ও পরিবেশ</div><a href="https://drive.google.com/file/d/1hhOAJOC7EMn5AvNcUb6byo_aWVn65lfE/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">বাংলাদেশের ইতিহাস ও বিশ্বসভ্যতা</div><a href="https://drive.google.com/file/d/1Q19zbmV_rDEBYxDF392yQ8vMX6GpEawN/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">কৃষি শিক্ষা</div><a href="https://drive.google.com/file/d/1oFKjDZQreZi2UPujaK1kTKCXMwKABvYi/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">অর্থনীতি</div><a href="https://drive.google.com/file/d/1N7cv9iubLTnqN-gG-kf7rG0ogjOTDCGM/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">পৌরনীতি ও নাগরিকতা</div><a href="https://drive.google.com/file/d/1EFpS4r7EKWnsjtU8TnJJ_Jp0rdKlO58b/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                    <div class="book-card"><div class="book-title">ধর্ম শিক্ষা</div><a href="https://drive.google.com/file/d/1K4ZWKR8GLpdVkdutdMXUfdt9mEuRgW-5/view?usp=sharing" target="_blank" class="download-btn">পড়ুন / ডাউনলোড</a></div>
-                </div>
-            </div>
-        </div>
-
     </div>
 
-    <footer>
-        <p>© ২০২৬ ডিজিটাল পাঠ্যপুস্তক লাইব্রেরি | সর্বস্বত্ব সংরক্ষিত</p>
-    </footer>
-
     <script>
-        function toggleSection(header) {
-            const section = header.parentElement;
-            
-            // Optional: Close other sections when opening a new one
-            document.querySelectorAll('.class-section').forEach(item => {
-                if (item !== section) {
-                    item.classList.remove('active');
-                }
-            });
+        function showSection(sectionId, btn) {
+            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('btn-active'));
+            document.getElementById(sectionId).classList.add('active');
+            btn.classList.add('btn-active');
+        }
 
-            section.classList.toggle('active');
+        function toggleProject(contentId, containerId, projectId, headerElem) {
+            const content = document.getElementById(contentId);
+            const icon = headerElem.querySelector('.icon');
+
+            if (content.style.display === "block") {
+                content.style.display = "none";
+                icon.innerText = "🔽";
+            } else {
+                content.style.display = "block";
+                icon.innerText = "🔼";
+                window.loadSecureProject(projectId, containerId);
+            }
+        }
+
+        /* স্টাডি হাব ডাটা - ১ম থেকে ১০ম শ্রেণীর বোর্ড বই */
+        const classBooksData = {
+            1: ["আমার বাংলা বই", "English for Today", "প্রাথমিক গণিত"],
+            2: ["আমার বাংলা বই", "English for Today", "প্রাথমিক গণিত"],
+            3: ["আমার বাংলা বই", "English for Today", "প্রাথমিক গণিত", "বাংলাদেশ ও বিশ্বপরিচয়", "প্রাথমিক বিজ্ঞান", "ইসলাম ও নৈতিক শিক্ষা"],
+            4: ["আমার বাংলা বই", "English for Today", "প্রাথমিক গণিত", "বাংলাদেশ ও বিশ্বপরিচয়", "প্রাথমিক বিজ্ঞান", "ইসলাম ও নৈতিক শিক্ষা"],
+            5: ["আমার বাংলা বই", "English for Today", "প্রাথমিক গণিত", "বাংলাদেশ ও বিশ্বপরিচয়", "প্রাথমিক বিজ্ঞান", "ইসলাম ও নৈতিক শিক্ষা"],
+            6: ["বাংলা সাহিত্য", "English for Today", "গণিত", "বিজ্ঞান", "ডিজিটাল প্রযুক্তি", "ইতিহাস ও সামাজিক বিজ্ঞান", "জীবন ও জীবিকা", "স্বাস্থ্য সুরক্ষা", "শিল্প ও সংস্কৃতি", "ইসলাম শিক্ষা"],
+            7: ["বাংলা সাহিত্য", "English for Today", "গণিত", "বিজ্ঞান", "ডিজিটাল প্রযুক্তি", "ইতিহাস ও সামাজিক বিজ্ঞান", "জীবন ও জীবিকা", "স্বাস্থ্য সুরক্ষা", "শিল্প ও সংস্কৃতি", "ইসলাম শিক্ষা"],
+            8: ["বাংলা সাহিত্য", "English for Today", "গণিত", "বিজ্ঞান", "ডিজিটাল প্রযুক্তি", "ইতিহাস ও সামাজিক বিজ্ঞান", "জীবন ও জীবিকা", "স্বাস্থ্য সুরক্ষা", "শিল্প ও সংস্কৃতি", "ইসলাম শিক্ষা"],
+            9: ["বাংলা সাহিত্য", "English for Today", "গণিত", "বিজ্ঞান", "ডিজিটাল প্রযুক্তি", "ইতিহাস ও সামাজিক বিজ্ঞান", "জীবন ও জীবিকা", "স্বাস্থ্য সুরক্ষা", "শিল্প ও সংস্কৃতি", "ইসলাম ও নৈতিক শিক্ষা"],
+            10: ["বাংলা সাহিত্য", "English Grammar and Composition", "গণিত", "পদার্থবিজ্ঞান", "রসায়ন", "জীববিজ্ঞান", "উচ্চতর গণিত", "তথ্য ও যোগাযোগ প্রযুক্তি", "বাংলাদেশ ও বিশ্বপরিচয়", "ইসলাম ও নৈতিক শিক্ষা"],
+            11: ["তথ্য ও যোগাযোগ প্রযুক্তি", "বাংলা প্রথম পত্র", "English for Today"],
+            12: ["তথ্য ও যোগাযোগ প্রযুক্তি", "বাংলা প্রথম পত্র", "English for Today"]
+        };
+
+        function openStudyFolder(viewId) {
+            document.getElementById('hubMainCategories').style.display = 'none';
+            document.getElementById(viewId).style.display = 'block';
+
+            if(viewId === 'academicView') {
+                renderClassGrid();
+            }
+        }
+
+        function backToHubMain() {
+            document.getElementById('academicView').style.display = 'none';
+            document.getElementById('ieltsView').style.display = 'none';
+            document.getElementById('islamicView').style.display = 'none';
+            document.getElementById('literatureView').style.display = 'none';
+            document.getElementById('classDetailView').style.display = 'none';
+            document.getElementById('hubMainCategories').style.display = 'grid';
+        }
+
+        function renderClassGrid() {
+            const grid = document.getElementById('classListGrid');
+            grid.innerHTML = '';
+            for(let i = 1; i <= 12; i++) {
+                grid.innerHTML += `
+                    <div class="hub-card" onclick="openClassDetail(${i})">
+                        <span>🎓</span> Class ${i}
+                    </div>
+                `;
+            }
+        }
+
+        function openClassDetail(classNum) {
+            document.getElementById('academicView').style.display = 'none';
+            document.getElementById('classDetailView').style.display = 'block';
+            document.getElementById('selectedClassTitle').innerText = `🎓 Class ${classNum} Resources`;
+
+            const booksContainer = document.getElementById('boardBooksContainer');
+            booksContainer.innerHTML = '';
+
+            const books = classBooksData[classNum] || ["এখনো কোনো বই যুক্ত করা হয়নি"];
+            books.forEach(book => {
+                booksContainer.innerHTML += `
+                    <li class="book-item">
+                        <span>📘 ${book}</span>
+                        <a href="#" onclick="alert('${book} ডাউনলোড লিঙ্ক শীঘ্রই যুক্ত হচ্ছে!')">ডাউনলোড / পড়ুন</a>
+                    </li>
+                `;
+            });
+        }
+
+        function backToAcademic() {
+            document.getElementById('classDetailView').style.display = 'none';
+            document.getElementById('academicView').style.display = 'block';
         }
     </script>
 </body>
