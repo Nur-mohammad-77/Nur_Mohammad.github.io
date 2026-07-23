@@ -50,11 +50,43 @@
         .resource-box { background: #f1f5f9; padding: 15px; border-radius: 8px; margin-top: 10px; }
         .resource-box h4 { margin-bottom: 8px; color: #1e293b; }
 
+        /* বিশেষ নোটিশ এবং লাইক বক্স স্টাইল */
+        .author-notice-box {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-left: 5px solid #2563eb;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #1e3a8a;
+            line-height: 1.6;
+        }
+        .like-container {
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-like {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 7px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: background 0.2s;
+        }
+        .btn-like:hover { background-color: #1d4ed8; }
+
         /* বইয়ের তালিকা স্টাইল */
         .book-list { list-style: none; padding: 0; margin-top: 10px; }
         .book-item { display: flex; justify-content: space-between; align-items: center; background: white; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 6px; margin-bottom: 8px; font-size: 14px; font-weight: 500; }
         .book-item a { background-color: #2563eb; color: white; text-decoration: none; padding: 6px 14px; border-radius: 4px; font-size: 13px; font-weight: 600; transition: background 0.2s; }
         .book-item a:hover { background-color: #1d4ed8; }
+        .disabled-btn { background-color: #94a3b8 !important; cursor: not-allowed; }
     </style>
 
     <!-- Firebase SDK Modules -->
@@ -197,7 +229,7 @@
             <!-- লেভেল ১: মূল ক্যাটাগরি -->
             <div id="hubMainCategories" class="grid-container">
                 <div class="hub-card" onclick="openStudyFolder('academicView')">
-                    <span>🏫</span> একাডেমি (Class 1 - 10)
+                    <span>🏫</span> একাডেমি (Class 1 - 12)
                 </div>
                 <div class="hub-card" onclick="openStudyFolder('ieltsView')">
                     <span>🇬🇧</span> IELTS প্রিপারেশন
@@ -222,8 +254,17 @@
                 <button class="back-btn" onclick="backToAcademic()">🔙 ক্লাস তালিকায় ফিরুন</button>
                 <h3 id="selectedClassTitle"></h3>
                 
+                <!-- ১১-১২ শ্রেণীর জন্য বিশেষ বার্তা ও লাইক ফিচার -->
+                <div id="writerNoticeBox" class="author-notice-box" style="display: none;">
+                    📢 <strong>বিশেষ বার্তা:</strong> যেসব রাইটারের বই এখানে রাখা হয়েছে, এই বিষয়ে যদি আপনাদের কোনো ব্যক্তিগত মতামত থাকে তবে দয়া করে জানাবেন। যদি আমার এই উদ্যোগটি ভালো লেগে থাকে তবে একটি লাইক দিন। আর যদি লেখক/প্রকাশক বা সংশ্লিষ্ট কারো কাছে এই বিষয়টি অসন্তোষজনক মনে হয়, তবে দয়া করে আমার সাথে যোগাযোগ করে নিষেধ করবেন, আমি সাথে সাথে বইটি সরিয়ে দেবো। এটি কোনো বাণিজ্যিক উদ্দেশ্যে নয়, সম্পূর্ণ শিক্ষার্থীদের সহায়তার উদ্দেশ্যে করা হয়েছে। ধন্যবাদ।
+                    <div class="like-container">
+                        <button class="btn-like" onclick="addLike()">👍 Like</button>
+                        <span id="likeCountText" style="font-weight: bold; color: #1e293b;">0 Likes</span>
+                    </div>
+                </div>
+
                 <div class="resource-box">
-                    <h4>📄 বোর্ড বই (NCTB Board Books)</h4>
+                    <h4>📄 বোর্ড ও রেফারেন্স বই</h4>
                     <ul class="book-list" id="boardBooksContainer"></ul>
                 </div>
 
@@ -322,7 +363,7 @@
             }
         }
 
-        /* আপনার প্রদানকৃত সব ক্লাসের বাস্তব গুগল ড্রাইভ লিঙ্ক */
+        /* ১ম থেকে ১২-শ শ্রেণীর সব বই এবং আপনার দেওয়া লিঙ্কসমূহ */
         const classBooksData = {
             1: [
                 { name: "আমার বাংলা বই", link: "https://drive.google.com/file/d/1BlBcoyyZdG_VNMoDdnpIMVilIW8WAFBF/view?usp=sharing" },
@@ -423,6 +464,55 @@
                 { name: "অর্থনীতি (Economics)", link: "https://drive.google.com/file/d/1N7cv9iubLTnqN-gG-kf7rG0ogjOTDCGM/view?usp=sharing" },
                 { name: "পৌরনীতি ও নাগরিকতা (Civics)", link: "https://drive.google.com/file/d/1EFpS4r7EKWnsjtU8TnJJ_Jp0rdKlO58b/view?usp=sharing" },
                 { name: "ইসলাম ও নৈতিক শিক্ষা (Religion)", link: "https://drive.google.com/file/d/1K4ZWKR8GLpdVkdutdMXUfdt9mEuRgW-5/view?usp=sharing" }
+            ],
+            "11-12": [
+                { name: "বাংলা ১ম পত্র (সাহিত্যপাঠ)", link: "https://drive.google.com/file/d/1bXOUmKQ275dSoIBA-A0eKwqe8yjlvJWI/view?usp=sharing" },
+                { name: "বাংলা ১ম পত্র (সহপাঠ)", link: "https://drive.google.com/file/d/1d00LxIWIHGTNhsh9HEGvEwBK8r2bHFfr/view?usp=sharing" },
+                { name: "English 1st Paper (English For Today)", link: "https://drive.google.com/file/d/11ixyyycw6cyotqGHemvlwTzfrD1E4hky/view?usp=sharing" },
+                { name: "ICT (পার্ট - ১)", link: "https://drive.google.com/file/d/1Ufd4HCCuaENzCMlsn4XS4eMfytzye_oN/view?usp=sharing" },
+                { name: "ICT (পার্ট - ২)", link: "https://drive.google.com/file/d/1SQEwosbBcU4Hcpn9OlHUMU9iVo2sfBZQ/view?usp=sharing" },
+                { name: "ICT (পার্ট - ৩)", link: "https://drive.google.com/file/d/1AHk6LZuVV9geGSsYSadCtRSjo0hIo5-W/view?usp=sharing" },
+                { name: "পদার্থবিজ্ঞান ১ম পত্র (পার্ট - ১)", link: "https://drive.google.com/file/d/1Cf19HnZQUR1i536ws_ho3kpW52Ilm10J/view?usp=sharing" },
+                { name: "পদার্থবিজ্ঞান ১ম পত্র (পার্ট - ২)", link: "https://drive.google.com/file/d/1YZy7pUh7QdJ2pYtRMeMWu3YeKeD2WzhO/view?usp=sharing" },
+                { name: "পদার্থবিজ্ঞান ১ম পত্র (পার্ট - ৩)", link: "https://drive.google.com/file/d/1GpUwTWbFe2S5eQCF3HJuZHGDdtXREqma/view?usp=sharing" },
+                { name: "পদার্থবিজ্ঞান ২য় পত্র", link: "https://drive.google.com/file/d/18R6JEBPoOiLnpUVlXmjE8KNcLuuOVQNh/view?usp=sharing" },
+                { name: "রসায়ন ১ম পত্র", link: "https://drive.google.com/file/d/1FDQ8EKFCKdMfJJuRf4-pgsVjU4Dc02hz/view?usp=sharing" },
+                { name: "রসায়ন ২য় পত্র", link: "https://drive.google.com/file/d/1_kpC2Dck6uo522RanEisLM6-5ZRpP7_R/view?usp=sharing" },
+                { name: "জীববিজ্ঞান ১ম পত্র (পার্ট - ১)", link: "https://drive.google.com/file/d/1XNV41CIYxDooF0Kz1j31aWSKxjMcQGlV/view?usp=sharing" },
+                { name: "জীববিজ্ঞান ১ম পত্র (পার্ট - ২)", link: "https://drive.google.com/file/d/1zMk7c4V2fdzzMUx8_kAYhGIp-s062cU1/view?usp=sharing" },
+                { name: "জীববিজ্ঞান ২য় পত্র (পার্ট - ১)", link: "https://drive.google.com/file/d/1ko1TcVJNw_xSul6XfbzS2OBX_A2ncP7m/view?usp=sharing" },
+                { name: "জীববিজ্ঞান ২য় পত্র (পার্ট - ২)", link: "https://drive.google.com/file/d/1AvMyijjvNkNVMqXEqJTWuNe517TI5Cwv/view?usp=sharing" },
+                { name: "উচ্চতর গণিত ১ম পত্র", link: "https://drive.google.com/file/d/1cGra3AnL11joZqHTPrTsiZpY2_l_s1os/view?usp=sharing" },
+                { name: "উচ্চতর গণিত ২য় পত্র", link: "https://drive.google.com/file/d/1KCbyp3LxQOgXE7iiOjYhcXyrHPRYxNq7/view?usp=sharing" },
+                { name: "বাংলা ২য় পত্র (ব্যাকরণ ও নির্মিতি)", link: "" },
+                { name: "English 2nd Paper (Grammar & Composition)", link: "" },
+                { name: "হিসাববিজ্ঞান ১ম পত্র", link: "" },
+                { name: "হিসাববিজ্ঞান ২য় পত্র", link: "" },
+                { name: "ব্যবসায় সংগঠন ও ব্যবস্থাপনা ১ম পত্র", link: "" },
+                { name: "ব্যবসায় সংগঠন ও ব্যবস্থাপনা ২য় পত্র", link: "" },
+                { name: "উৎপাদন ব্যবস্থাপনা ও বিপণন ১ম পত্র", link: "" },
+                { name: "উৎপাদন ব্যবস্থাপনা ও বিপণন ২য় পত্র", link: "" },
+                { name: "ফিন্যান্স, ব্যাংকিং ও বীমা ১ম পত্র", link: "" },
+                { name: "ফিন্যান্স, ব্যাংকিং ও বীমা ২য় পত্র", link: "" },
+                { name: "পৌরনীতি ও সুশাসন ১ম পত্র", link: "" },
+                { name: "পৌরনীতি ও সুশাসন ২য় পত্র", link: "" },
+                { name: "অর্থনীতি ১ম পত্র", link: "" },
+                { name: "অর্থনীতি ২য় পত্র", link: "" },
+                { name: "ইতিহাস", link: "" },
+                { name: "ইসলামের ইতিহাস ও সংস্কৃতি ১ম পত্র", link: "" },
+                { name: "ইসলামের ইতিহাস ও সংস্কৃতি ২য় পত্র", link: "" },
+                { name: "সমাজবিজ্ঞান", link: "" },
+                { name: "সমাজকর্ম ১ম পত্র", link: "" },
+                { name: "সমাজকর্ম ২য় পত্র", link: "" },
+                { name: "যুক্তিবিদ্যা ১ম পত্র", link: "" },
+                { name: "যুক্তিবিদ্যা ২য় পত্র", link: "" },
+                { name: "ভূগোল ১ম পত্র", link: "" },
+                { name: "ভূগোল ২য় পত্র", link: "" },
+                { name: "ইসলাম শিক্ষা", link: "" },
+                { name: "মনোবিজ্ঞান", link: "" },
+                { name: "কৃষি শিক্ষা", link: "" },
+                { name: "গার্হস্থ্য বিজ্ঞান / গৃহ ব্যবস্থাপনা", link: "" },
+                { name: "পরিসংখ্যান", link: "" }
             ]
         };
 
@@ -448,7 +538,6 @@
             const grid = document.getElementById('classListGrid');
             grid.innerHTML = '';
             
-            // Class 1 to 8
             for(let i = 1; i <= 8; i++) {
                 grid.innerHTML += `
                     <div class="hub-card" onclick="openClassDetail('${i}')">
@@ -456,10 +545,12 @@
                     </div>
                 `;
             }
-            // Class 9-10
             grid.innerHTML += `
                 <div class="hub-card" onclick="openClassDetail('9-10')">
                     <span>🎓</span> Class 9-10
+                </div>
+                <div class="hub-card" onclick="openClassDetail('11-12')">
+                    <span>🎓</span> Class 11-12
                 </div>
             `;
         }
@@ -469,6 +560,15 @@
             document.getElementById('classDetailView').style.display = 'block';
             document.getElementById('selectedClassTitle').innerText = `🎓 Class ${classNum} Resources`;
 
+            // একাদশ-দ্বাদশ শ্রেণীর জন্য বিশেষ বার্তা ও লাইক সেকশন শো করা
+            const noticeBox = document.getElementById('writerNoticeBox');
+            if (classNum === '11-12') {
+                noticeBox.style.display = 'block';
+                updateLikeDisplay();
+            } else {
+                noticeBox.style.display = 'none';
+            }
+
             const booksContainer = document.getElementById('boardBooksContainer');
             booksContainer.innerHTML = '';
 
@@ -477,10 +577,13 @@
                 booksContainer.innerHTML = '<li class="book-item"><span>কোনো বই পাওয়া যায়নি</span></li>';
             } else {
                 books.forEach(book => {
+                    const isAvailable = book.link && book.link.trim() !== "";
                     booksContainer.innerHTML += `
                         <li class="book-item">
                             <span>📘 ${book.name}</span>
-                            <a href="${book.link}" target="_blank">ডাউনলোড / পড়ুন</a>
+                            ${isAvailable ? 
+                                `<a href="${book.link}" target="_blank">ডাউনলোড / পড়ুন</a>` : 
+                                `<a href="javascript:void(0)" class="disabled-btn" onclick="alert('বইটির লিঙ্ক শীঘ্রই যুক্ত হচ্ছে!')">শীঘ্রই আসছে</a>`}
                         </li>
                     `;
                 });
@@ -490,6 +593,19 @@
         function backToAcademic() {
             document.getElementById('classDetailView').style.display = 'none';
             document.getElementById('academicView').style.display = 'block';
+        }
+
+        /* লাইক বাটন হ্যান্ডলার (Local Storage ভিত্তিক) */
+        function addLike() {
+            let likes = parseInt(localStorage.getItem('hsc_book_likes') || '0');
+            likes += 1;
+            localStorage.setItem('hsc_book_likes', likes);
+            updateLikeDisplay();
+        }
+
+        function updateLikeDisplay() {
+            let likes = localStorage.getItem('hsc_book_likes') || '0';
+            document.getElementById('likeCountText').innerText = likes + " Likes";
         }
     </script>
 </body>
