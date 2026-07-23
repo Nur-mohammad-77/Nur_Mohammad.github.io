@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
     document.head.appendChild(sidebarStyle);
 
-    // ২. ৩-বার বোতাম
+    // ২. ৩-বার বাটন বসানো
     const header = document.querySelector("header");
     if (header) {
         const toggleBtn = document.createElement("div");
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.insertAdjacentHTML("beforeend", sidebarHTML);
 });
 
-// ৪. সাইডবার খোলা/বন্ধ করা
+// ৪. সাইডবার ওপেন/ক্লোজ
 window.toggleNavSidebar = function () {
     const sidebar = document.getElementById("customSidebar");
     const overlay = document.getElementById("sidebarOverlay");
@@ -111,70 +111,30 @@ window.toggleNavSidebar = function () {
     }
 };
 
-// ৫. সেকশন পরিবর্তন ও কন্টেন্ট লোড
+// ৫. মূলui-data.js ও app.js এর অরিজিনাল ফাংশনগুলোকে ট্রিগার করা
 window.triggerSection = function (sectionId) {
-    const allSections = document.querySelectorAll('.section');
-    allSections.forEach(sec => sec.classList.remove('active'));
+    const navButtons = document.querySelectorAll("header nav button");
+    let found = false;
 
-    const targetSection = document.getElementById(sectionId);
-    if (targetSection) {
-        targetSection.classList.add('active');
+    navButtons.forEach(btn => {
+        if (btn.getAttribute("onclick") && btn.getAttribute("onclick").includes(sectionId)) {
+            btn.click();
+            found = true;
+        }
+    });
+
+    if (!found) {
+        const allSections = document.querySelectorAll('.section');
+        allSections.forEach(sec => sec.classList.remove('active'));
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) targetSection.classList.add('active');
+        if (typeof showSection === "function") showSection(sectionId);
     }
 
-    if (sectionId === "studyHub") {
-        window.closeStudyFolder();
+    // ব্যাক থাকলে শিক্ষা হাব মেইন ক্যাটাগরিতে ফেরত নেওয়া
+    if (sectionId === 'studyHub' && typeof closeStudyFolder === 'function') {
+        closeStudyFolder();
     }
 
     window.toggleNavSidebar();
-};
-
-// ৬. শিক্ষা হাবের ক্যাটাগরি ড্রিল-ডাউন (একাডেমি কন্টেন্ট লোডিং ফিক্স)
-window.openStudyFolder = function (folderId) {
-    const mainCat = document.getElementById("hubMainCategories");
-    const subViewsContainer = document.getElementById("studyHubViews");
-
-    if (mainCat) mainCat.style.display = "none";
-
-    let folderTitle = "বিভাগীয় রিসোর্স";
-    let contentHTML = "";
-
-    if (folderId === 'academicView') {
-        folderTitle = "🏫 একাডেমি (Class 1 - 12)";
-        contentHTML = `
-            <ul class="book-list">
-                <li class="book-item"><span>📘 ক্লাস ৯-১০ গণিত নোটস</span> <a href="#">ডাউনলোড</a></li>
-                <li class="book-item"><span>📕 এইচএসসি পদার্থবিজ্ঞান গাইড</span> <a href="#">ডাউনলোড</a></li>
-            </ul>
-        `;
-    } else if (folderId === 'ieltsView') {
-        folderTitle = "🇬🇧 IELTS প্রিপারেশন";
-        contentHTML = `<p>IELTS স্পিকিং ও রাইটিং ম্যাটেরিয়ালস এখানে উপলব্ধ।</p>`;
-    } else if (folderId === 'islamicView') {
-        folderTitle = "🕌 ইসলামিক বই";
-        contentHTML = `<p>ইসলামিক বই ও বয়ান কালেকশন।</p>`;
-    } else if (folderId === 'literatureView') {
-        folderTitle = "📖 সাহিত্য ও অন্যান্য";
-        contentHTML = `<p>উপন্যাস ও সাহিত্য গ্রন্থ।</p>`;
-    }
-
-    if (subViewsContainer) {
-        subViewsContainer.innerHTML = `
-            <button class="back-btn" onclick="window.closeStudyFolder()">⬅️ ফিরে যান</button>
-            <div class="resource-box">
-                <h4>${folderTitle}</h4>
-                ${contentHTML}
-            </div>
-        `;
-        subViewsContainer.style.display = "block";
-    }
-};
-
-window.closeStudyFolder = function () {
-    const mainCat = document.getElementById("hubMainCategories");
-    const subViewsContainer = document.getElementById("studyHubViews");
-    if (mainCat) mainCat.style.display = "grid";
-    if (subViewsContainer) {
-        subViewsContainer.style.display = "none";
-        subViewsContainer.innerHTML = "";
-    }
 };
