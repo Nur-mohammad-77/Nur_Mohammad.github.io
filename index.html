@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>নুর মোহাম্মদ - অল-ইন-ওয়ান পোর্টফোলিও</title>
     
-    <!-- Font Awesome (৩-বার ও ক্রস আইকনের জন্য) -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -22,12 +22,10 @@
         header h1 { font-size: 28px; margin-bottom: 5px; }
         header p { color: #cbd5e1; font-size: 15px; }
         
-        /* মূল হেডারের ন্যাপবার লুকিয়ে রাখা */
         header nav { display: none !important; }
 
         .container { max-width: 850px; margin: 30px auto; padding: 0 15px; }
         
-        /* সেকশন কার্ড ডিজাইন (যা ভেঙে গিয়েছিল) */
         .section { 
             display: none; 
             background: #ffffff; 
@@ -39,11 +37,26 @@
         .section.active { display: block !important; }
         .section h2 { font-size: 22px; color: #0f172a; margin-bottom: 12px; }
         
+        /* নোটিশ ও মতামত বক্স স্টাইল */
+        .notice-feedback-box {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-left: 5px solid #0284c7;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+        .notice-feedback-box h3 { color: #0369a1; margin-bottom: 8px; font-size: 17px; }
+        .notice-feedback-box p { font-size: 14px; color: #334155; margin-bottom: 12px; }
+        .feedback-area { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; resize: vertical; min-height: 70px; font-size: 14px; margin-bottom: 10px; outline: none; }
+        .btn-feedback { background-color: #0284c7; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .btn-feedback:hover { background-color: #0369a1; }
+        .feedback-msg { color: #16a34a; font-size: 13px; font-weight: bold; margin-top: 5px; display: none; }
+
         /* লগইন বক্স */
         .auth-card { border: 1px solid #cbd5e1; border-radius: 8px; padding: 25px; background: #f8fafc; max-width: 380px; margin: 20px auto; }
         .auth-card input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #cbd5e1; border-radius: 6px; outline: none; }
         
-        /* প্রজেক্ট একর্ডিয়ন বর্ডার ও হেডার */
         .project-card { border: 1px solid #cbd5e1; border-radius: 8px; margin-top: 15px; background: #ffffff; overflow: hidden; }
         .project-header { background: #f1f5f9; padding: 15px 20px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; transition: background 0.2s; }
         .project-header:hover { background: #e2e8f0; }
@@ -56,8 +69,8 @@
         .error-text { color: #ef4444; font-size: 13px; font-weight: bold; margin-top: 8px; text-align: center; }
 
         /* সোশ্যাল মিডিয়া বাটন স্টাইল */
-        .social-links { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
-        .btn-social { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px; transition: transform 0.2s, opacity 0.2s; }
+        .social-links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
+        .btn-social { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; color: white !important; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px; transition: transform 0.2s, opacity 0.2s; }
         .btn-social:hover { transform: translateY(-2px); opacity: 0.9; }
         .btn-facebook { background-color: #1877F2; }
         .btn-twitter { background-color: #000000; }
@@ -73,28 +86,10 @@
         .resource-box { background: #f1f5f9; padding: 15px; border-radius: 8px; margin-top: 10px; }
         .resource-box h4 { margin-bottom: 8px; color: #1e293b; }
 
-        /* বিশেষ নোটিশ এবং লাইক বক্স স্টাইল */
-        .author-notice-box {
-            background: #eff6ff;
-            border: 1px solid #bfdbfe;
-            border-left: 5px solid #2563eb;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            color: #1e3a8a;
-            line-height: 1.6;
-        }
-        .like-container { margin-top: 12px; display: flex; align-items: center; gap: 10px; }
-        .btn-like { background-color: #2563eb; color: white; border: none; padding: 7px 15px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 13px; transition: background 0.2s; }
-        .btn-like:hover { background-color: #1d4ed8; }
-
-        /* বইয়ের তালিকা স্টাইল */
         .book-list { list-style: none; padding: 0; margin-top: 10px; }
         .book-item { display: flex; justify-content: space-between; align-items: center; background: white; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 6px; margin-bottom: 8px; font-size: 14px; font-weight: 500; }
         .book-item a { background-color: #2563eb; color: white; text-decoration: none; padding: 6px 14px; border-radius: 4px; font-size: 13px; font-weight: 600; transition: background 0.2s; }
         .book-item a:hover { background-color: #1d4ed8; }
-        .disabled-btn { background-color: #94a3b8 !important; cursor: not-allowed; }
     </style>
 </head>
 <body>
@@ -157,10 +152,19 @@
 
         <!-- ৪. জ্ঞান ও শিক্ষা হাব -->
         <div id="studyHub" class="section">
+            <!-- নোটিশ ও মতামত বক্স -->
+            <div class="notice-feedback-box">
+                <h3>📢 বিশেষ নোটিশ</h3>
+                <p>শিক্ষা হাব সেকশনে নিয়মিত নতুন বই ও নোটস আপডেট করা হচ্ছে। আপনার যেকোনো মতামত নিচে শেয়ার করতে পারেন:</p>
+                <textarea id="userFeedback" class="feedback-area" placeholder="এখানে আপনার মতামত বা পরামর্শ লিখুন..."></textarea>
+                <button class="btn-feedback" onclick="submitFeedback()">মতামত পাঠান</button>
+                <div id="feedbackSuccess" class="feedback-msg">আপনার মতামত সফলভাবে জমা হয়েছে! ধন্যবাদ।</div>
+            </div>
+
             <h2>📚 ডিজিটাল জ্ঞান ও শিক্ষা হাব</h2>
             <p>এখানে সব ধরণের বই, লেকচার নোটস ও ক্লাস রেকর্ড সুসংগঠিত রয়েছে:</p>
 
-            <!-- ক্যাটাগরি -->
+            <!-- ক্যাটাগরি কার্ড -->
             <div id="hubMainCategories" class="grid-container">
                 <div class="hub-card" onclick="openStudyFolder('academicView')"><span>🏫</span> একাডেমি (Class 1 - 12)</div>
                 <div class="hub-card" onclick="openStudyFolder('ieltsView')"><span>🇬🇧</span> IELTS প্রিপারেশন</div>
@@ -168,8 +172,8 @@
                 <div class="hub-card" onclick="openStudyFolder('literatureView')"><span>📖</span> সাহিত্য ও অন্যান্য</div>
             </div>
 
-            <!-- ui-data.js থেকে অতিরিক্ত ভিউ লোড হবে -->
-            <div id="studyHubViews"></div>
+            <!-- সাব ভিউ কন্টেন্ট -->
+            <div id="studyHubViews" style="margin-top: 20px;"></div>
         </div>
 
         <!-- ৫. ভবিষ্যৎ প্ল্যান -->
@@ -189,15 +193,34 @@
             <h2>📲 সামাজিক যোগাযোগ মাধ্যমে যুক্ত হন</h2>
             <p>আমার সাথে যেকোনো সামাজিক মাধ্যমে যুক্ত হতে পারেন:</p>
 
-            <!-- ui-data.js থেকে লিঙ্কগুলো লোড হবে -->
-            <div class="social-links" id="socialLinksContainer"></div>
+            <div class="social-links" id="socialLinksContainer">
+                <a href="https://facebook.com" target="_blank" class="btn-social btn-facebook"><i class="fa-brands fa-facebook"></i> Facebook</a>
+                <a href="https://twitter.com" target="_blank" class="btn-social btn-twitter"><i class="fa-brands fa-x-twitter"></i> Twitter</a>
+                <a href="https://instagram.com" target="_blank" class="btn-social btn-instagram"><i class="fa-brands fa-instagram"></i> Instagram</a>
+                <a href="https://linkedin.com" target="_blank" class="btn-social btn-linkedin"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+            </div>
         </div>
     </div>
 
-    <!-- External JavaScript File Links -->
+    <!-- JavaScript Links -->
     <script src="ui-data.js"></script>
     <script type="module" src="app.js"></script>
-    <!-- ৩-বার সাইডবারের স্ক্রিপ্ট -->
     <script src="sidebar.js"></script>
+
+    <script>
+        // মতামত সেভ করার ফাংশন
+        function submitFeedback() {
+            const input = document.getElementById("userFeedback");
+            const msg = document.getElementById("feedbackSuccess");
+            if (input.value.trim() !== "") {
+                let feedbacks = JSON.parse(localStorage.getItem("siteFeedbacks") || "[]");
+                feedbacks.push(input.value);
+                localStorage.setItem("siteFeedbacks", JSON.stringify(feedbacks));
+                input.value = "";
+                msg.style.display = "block";
+                setTimeout(() => { msg.style.display = "none"; }, 4000);
+            }
+        }
+    </script>
 </body>
 </html>
